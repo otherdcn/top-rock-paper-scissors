@@ -32,12 +32,6 @@ function getComputerChoice() {
   return choices[computerSelection];
 }
 
-const playerSelection = getPlayerChoice();
-const computerSelection = getComputerChoice();
-
-console.log(`You chose: ${playerSelection}`);
-console.log(`Lee chose: ${computerSelection}`);
-
 function playRound(playerSelection,computerSelection) {
 
   const possibleOutcomes = [['rock','rock','draw'],
@@ -53,13 +47,55 @@ function playRound(playerSelection,computerSelection) {
 
   for (let i = 0; i < possibleOutcomes.length; i++) {
     if (playerSelection === possibleOutcomes[i][0] && computerSelection === possibleOutcomes[i][1]) {
-      return `You ${possibleOutcomes[i][2]}!`;
+      return possibleOutcomes[i][2];
     }
   }
 }
 
-console.log("--------------------------------------------");
+function playGame() {
+  const bestOf = 5;
+  let roundsPlayed = 0;
+  let result;
+  const score = {
+    'Player Wins': 0,
+    'Lee Wins': 0,
+    'Stalemate': 0
+  };
+  let playerSelection;
+  let computerSelection;
 
-const result = playRound(playerSelection,computerSelection);
+  while (roundsPlayed < bestOf) {
+    console.log('Round '+(roundsPlayed+1));
 
-console.log(result);
+    playerSelection = getPlayerChoice();
+    computerSelection = getComputerChoice();
+    result = playRound(playerSelection,computerSelection);
+
+    console.log(`You chose: ${playerSelection}`);
+    console.log(`Lee chose: ${computerSelection}`);
+
+    console.log(`You ${result}!`);
+
+    switch (result) {
+      case 'win':
+        score['Player Wins'] += 1;
+        break;
+      case 'lose':
+        score['Lee Wins'] += 1;
+        break;
+      default:
+        score['Stalemate'] += 1;
+        break;
+    }
+
+    roundsPlayed++;
+  }
+
+  console.log("--------------------------------------------");
+
+  for (const outcome in score) {
+    console.log(`- ${outcome}: ${score[outcome]}`);
+  }
+}
+
+playGame();
