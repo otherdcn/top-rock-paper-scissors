@@ -5,10 +5,34 @@ console.log("--------------------------------------------");
 
 const choices = ['rock','paper','scissors'];
 
+function getplayerChoice() {
+  let playerSelection;
+  let wrongInput = false;
+
+  do {
+    const playerInput = prompt("Rock? Paper? Scissor?");
+
+    playerSelection = playerInput.toLowerCase();
+
+    if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissor') {
+      wrongInput = false;
+    } else {
+      alert(`Unkown input or misspelling (${playerInput}). Please type Rock, Paper or Scissor.`);
+      wrongInput = true;
+    }
+
+  } while (wrongInput);
+
+  return playerSelection
+}
+
 function getComputerChoice() {
-  // const choices = ['rock','paper','scissors'];
   const computerSelection = Math.floor(Math.random()*choices.length);
   return choices[computerSelection];
 }
 
-console.log(`Computer chose: ${getComputerChoice()}`);
+const playerSelection = getplayerChoice();
+const computerSelection = getComputerChoice();
+
+console.log(`You chose: ${playerSelection}`);
+console.log(`Lee chose: ${computerSelection}`);
