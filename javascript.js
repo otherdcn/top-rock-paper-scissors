@@ -5,6 +5,11 @@ console.log("Let's play a game of Rock, Papers, Scissors!");
 console.log("--------------------------------------------");
 
 const choices = ['rock','paper','scissors'];
+const score = {
+  'Player Wins': 0,
+  'Lee Wins': 0,
+  'Stalemate': 0
+};
 
 function getComputerChoice() {
   const computerSelection = Math.floor(Math.random()*choices.length);
@@ -62,7 +67,28 @@ function playGame(e) {
   console.log(`You chose: ${playerSelection}`);
   console.log(`Lee chose: ${computerSelection}`);
   console.log(`You ${result}!`);
+  calculateScore(result);
 }
 
 const buttonDivCollection = document.querySelector("#option_buttons");
 buttonDivCollection.addEventListener("click", playGame);
+
+function calculateScore(result) {
+  switch (result) {
+    case 'win':
+      score['Player Wins'] += 1;
+      break;
+    case 'lose':
+      score['Lee Wins'] += 1;
+      break;
+    default:
+      score['Stalemate'] += 1;
+      break;
+  }
+
+  for (const outcome in score) {
+    console.log(`- ${outcome}: ${score[outcome]}`);
+  }
+
+  console.log("--------------------------------------------");
+}
