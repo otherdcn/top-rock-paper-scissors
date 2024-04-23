@@ -11,6 +11,11 @@ const score = {
   'Stalemate': 0
 };
 
+const playerScore = document.querySelector("#player_score");
+const computerScore = document.querySelector("#computer_score");
+const drawScore = document.querySelector("#stalemate_score");
+const roundResultText = document.querySelector("#round_result");
+
 function getComputerChoice() {
   const computerSelection = Math.floor(Math.random()*choices.length);
   return choices[computerSelection];
@@ -67,6 +72,9 @@ function playGame(e) {
   console.log(`You chose: ${playerSelection}`);
   console.log(`Lee chose: ${computerSelection}`);
   console.log(`You ${result}!`);
+
+  roundResultText.textContent = `Result: You chose: ${playerSelection} <---> Lee chose ${computerSelection}`;
+
   calculateScore(result);
 }
 
@@ -91,4 +99,8 @@ function calculateScore(result) {
   }
 
   console.log("--------------------------------------------");
+
+  playerScore.textContent = score['Player Wins'];
+  computerScore.textContent = score['Lee Wins'];
+  drawScore.textContent = score['Stalemate'];
 }
