@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper, Scissors</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script src="./javascript.js"></script>
+    <script src="./javascript.js" defer></script>
   </head>
   <body>
-    <script>
-      // Your JavaScript goes here!
-      // console.log("Hello, World!")
-    </script>
+    <div id="option_buttons">
+      <button id="rock_button">Rock</button>
+      <button id="paper_button">Paper</button>
+      <button id="scissors_button">Scissors</button>
+    </div>
+    <div id="scoreboard">
+      <p id="player">You: <span id="player_score">0</span></p>
+      <p id="computer">Lee: <span id="computer_score">0</span></p>
+      <p id="computer">Draw: <span id="stalemate_score">0</span></p>
+    </div>
   </body>
 </html>
