@@ -6,27 +6,6 @@ console.log("--------------------------------------------");
 
 const choices = ['rock','paper','scissors'];
 
-function getPlayerChoice() {
-  let playerSelection;
-  let wrongInput = false;
-
-  do {
-    const playerInput = prompt("Rock? Paper? Scissors?");
-
-    playerSelection = playerInput.toLowerCase();
-
-    if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors') {
-      wrongInput = false;
-    } else {
-      alert(`Unkown input or misspelling (${playerInput}). Please type Rock, Paper or Scissors.`);
-      wrongInput = true;
-    }
-
-  } while (wrongInput);
-
-  return playerSelection
-}
-
 function getComputerChoice() {
   const computerSelection = Math.floor(Math.random()*choices.length);
   return choices[computerSelection];
@@ -52,50 +31,38 @@ function playRound(playerSelection,computerSelection) {
   }
 }
 
-function playGame() {
-  const bestOf = 5;
-  let roundsPlayed = 0;
-  let result;
-  const score = {
-    'Player Wins': 0,
-    'Lee Wins': 0,
-    'Stalemate': 0
-  };
+function playGame(e) {
+  let target = e.target;
   let playerSelection;
-  let computerSelection;
+  let computerSelection = getComputerChoice();
 
-  while (roundsPlayed < bestOf) {
-    console.log('Round '+(roundsPlayed+1));
+  let result;
 
-    playerSelection = getPlayerChoice();
-    computerSelection = getComputerChoice();
-    result = playRound(playerSelection,computerSelection);
-
-    console.log(`You chose: ${playerSelection}`);
-    console.log(`Lee chose: ${computerSelection}`);
-
-    console.log(`You ${result}!`);
-
-    switch (result) {
-      case 'win':
-        score['Player Wins'] += 1;
-        break;
-      case 'lose':
-        score['Lee Wins'] += 1;
-        break;
-      default:
-        score['Stalemate'] += 1;
-        break;
-    }
-
-    roundsPlayed++;
+  switch(target.id) {
+    case 'rock_button':
+      playerSelection = "rock";
+      result = playRound(playerSelection,computerSelection);
+      break;
+    case 'paper_button':
+      playerSelection = "paper";
+      result = playRound(playerSelection,computerSelection);
+      break;
+    case 'scissors_button':
+      playerSelection = "scissors";
+      result = playRound(playerSelection,computerSelection);
+      break;
+    default:
+      console.log('Nothing was pressed');
+      playerSelection = ":-(";
+      break;
   }
 
-  console.log("--------------------------------------------");
+  result = playRound(playerSelection,computerSelection);
 
-  for (const outcome in score) {
-    console.log(`- ${outcome}: ${score[outcome]}`);
-  }
+  console.log(`You chose: ${playerSelection}`);
+  console.log(`Lee chose: ${computerSelection}`);
+  console.log(`You ${result}!`);
 }
 
-playGame();
+const buttonDivCollection = document.querySelector("#option_buttons");
+buttonDivCollection.addEventListener("click", playGame);
