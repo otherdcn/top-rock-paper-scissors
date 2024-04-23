@@ -5,9 +5,9 @@ console.log("Let's play a game of Rock, Papers, Scissors!");
 console.log("--------------------------------------------");
 
 const choices = ['rock','paper','scissors'];
-const score = {
-  'Player Wins': 0,
-  'Lee Wins': 0,
+const scoreBoard = {
+  'Player': 0,
+  'Lee': 0,
   'Stalemate': 0
 };
 
@@ -73,7 +73,7 @@ function playGame(e) {
   console.log(`Lee chose: ${computerSelection}`);
   console.log(`You ${result}!`);
 
-  roundResultText.textContent = `Result: You chose: ${playerSelection} <---> Lee chose ${computerSelection}`;
+  roundResultText.textContent = `Result: You chose ${playerSelection} <---> Lee chose ${computerSelection} || You ${result}`;
 
   calculateScore(result);
 }
@@ -84,23 +84,23 @@ buttonDivCollection.addEventListener("click", playGame);
 function calculateScore(result) {
   switch (result) {
     case 'win':
-      score['Player Wins'] += 1;
+      scoreBoard['Player'] += 1;
       break;
     case 'lose':
-      score['Lee Wins'] += 1;
+      scoreBoard['Lee'] += 1;
       break;
     default:
-      score['Stalemate'] += 1;
+      scoreBoard['Stalemate'] += 1;
       break;
   }
 
-  for (const outcome in score) {
-    console.log(`- ${outcome}: ${score[outcome]}`);
+  for (const outcome in scoreBoard) {
+    console.log(`- ${outcome}: ${scoreBoard[outcome]}`);
   }
 
   console.log("--------------------------------------------");
 
-  playerScore.textContent = score['Player Wins'];
-  computerScore.textContent = score['Lee Wins'];
-  drawScore.textContent = score['Stalemate'];
+  playerScore.textContent = scoreBoard['Player'];
+  computerScore.textContent = scoreBoard['Lee'];
+  drawScore.textContent = scoreBoard['Stalemate'];
 }
