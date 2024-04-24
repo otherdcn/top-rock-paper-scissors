@@ -14,7 +14,7 @@ const scoreBoard = {
 const playerScore = document.querySelector("#player_score");
 const computerScore = document.querySelector("#computer_score");
 const drawScore = document.querySelector("#stalemate_score");
-const roundResultText = document.querySelector("#round_result");
+const roundResultText = document.querySelector("#result");
 
 function getComputerChoice() {
   const computerSelection = Math.floor(Math.random()*choices.length);

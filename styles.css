@@ -1,0 +1,66 @@
+html {
+  background-color: black;
+  color: black;
+  padding: 15px;
+}
+
+.container {
+  background-color: #fef12a;
+  padding: 0 50px;
+  width: 575px;
+  /* height: 150px; */
+  margin: auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#option_buttons {
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 10px;
+}
+
+#scoreboard {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 5px;
+  margin: 10px auto;
+  padding: 2px;
+}
+
+#player_score, #computer_score, #stalemate_score, #result, .info {
+  background-color: #f7f097;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.info {
+  margin: 10px auto;
+  padding: 1px;
+}
+
+button {
+  border-radius: 10px;
+  background-color: black;
+  color: #f7f097;
+  border: none;
+  padding: 5px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  width: 110px;
+}
+
+.info p {
+  text-align: center;
+}
