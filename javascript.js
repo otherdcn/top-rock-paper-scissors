@@ -1,9 +1,3 @@
-console.log("Hi there!");
-console.log("I'm Lee, the computer :-D!");
-console.log("Let's play a game of Rock, Papers, Scissors!");
-
-console.log("--------------------------------------------");
-
 const choices = ['rock','paper','scissors'];
 const scoreBoard = {
   'Player': 0,
@@ -51,27 +45,19 @@ function playGame(e) {
   switch(target.id) {
     case 'rock_button':
       playerSelection = "rock";
-      result = playRound(playerSelection,computerSelection);
       break;
     case 'paper_button':
       playerSelection = "paper";
-      result = playRound(playerSelection,computerSelection);
       break;
     case 'scissors_button':
       playerSelection = "scissors";
-      result = playRound(playerSelection,computerSelection);
       break;
     default:
-      console.log('Nothing was pressed');
       playerSelection = ":-(";
       break;
   }
 
   result = playRound(playerSelection,computerSelection);
-
-  console.log(`You chose: ${playerSelection}`);
-  console.log(`Lee chose: ${computerSelection}`);
-  console.log(`You ${result}!`);
 
   roundResultText.textContent = `Result: You chose ${playerSelection} <---> Lee chose ${computerSelection} || You ${result}`;
 
@@ -94,13 +80,43 @@ function calculateScore(result) {
       break;
   }
 
-  for (const outcome in scoreBoard) {
-    console.log(`- ${outcome}: ${scoreBoard[outcome]}`);
-  }
-
-  console.log("--------------------------------------------");
-
   playerScore.textContent = scoreBoard['Player'];
   computerScore.textContent = scoreBoard['Lee'];
   drawScore.textContent = scoreBoard['Stalemate'];
+
+  for (const player in scoreBoard) {
+    if ((scoreBoard[player] === 5) && (player !== 'Stalemate')) {
+      announceWinner(player);
+    }
+  }
+}
+
+function announceWinner(player) {
+  const restartButton = document.createElement("button");
+  function reloadPage() {
+    window.location.reload();
+    return false;
+  }
+
+  switch(player){
+    case 'Player':
+      roundResultText.textContent = `Congratz! YOU WIN!`;
+      roundResultText.style.backgroundColor = 'green';
+      break;
+    case 'Lee':
+      roundResultText.textContent = `GAME OVER! I WIN!`;
+      roundResultText.style.backgroundColor = 'red';
+      break;
+    default:
+      roundResultText.textContent = `Woops! Error :-(`;
+      roundResultText.style.backgroundColor = 'grey';
+      break;
+  }
+  restartButton.textContent = "Restart Game"
+  restartButton.style.width = "145px";
+
+  buttonDivCollection.textContent = "";
+  buttonDivCollection.appendChild(restartButton);
+
+  restartButton.addEventListener("click", reloadPage);
 }
